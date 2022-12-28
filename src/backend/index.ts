@@ -1,5 +1,4 @@
 import { startServer } from './server'
+import { config } from './config'
 
-startServer({
-    port: 3000,
-})
+startServer(config.server)
