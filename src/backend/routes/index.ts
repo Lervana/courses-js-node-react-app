@@ -1,5 +1,6 @@
 import express from 'express'
 import { getStatus } from './status/get.status'
+import { postUser } from './user/post.user'
 
 const router = express.Router()
 
@@ -14,7 +15,8 @@ router.get('/', (req, res) => {
     res.send('Example home page')
 })
 
-// api route
+// api routes
 router.get('/api/status', getStatus)
+router.post('/api/user', postUser)
 
 export default router
