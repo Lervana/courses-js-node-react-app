@@ -10,6 +10,11 @@ import getDishes from './dish/get.dishes'
 import postDish from './dish/post.dish'
 import patchDish from './dish/patch.dish'
 import deleteDish from './dish/delete.dish'
+import postOrder from './order/post.order'
+import patchOrder from './order/patch.order'
+import getOrder from './order/get.order'
+import deleteOrder from './order/delete.order'
+import getOrders from './order/get.orders'
 
 const router = express.Router()
 
@@ -30,6 +35,11 @@ const apiRoutes = [
     postDish,
     patchDish,
     deleteDish,
+    postOrder,
+    patchOrder,
+    getOrder,
+    getOrders,
+    deleteOrder,
 ]
 
 apiRoutes.forEach((route) =>
