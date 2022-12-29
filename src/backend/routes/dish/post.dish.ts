@@ -5,18 +5,24 @@ import { StatusCodes } from 'http-status-codes'
 import { TRoute } from '../types'
 import { handleRequest } from '../../utils/request.utils'
 import { authorize } from '../../utils/middleware.utils'
-import { createCategory, TCategoryData } from '../../services/category.service'
+import { createDish, TDishData } from '../../services/dish.service'
 
 export default {
     method: 'post',
-    path: '/api/category',
-    validators: [authorize, body('name').not().isEmpty().isAlphanumeric()],
+    path: '/api/dish',
+    validators: [
+        authorize,
+        body('name').not().isEmpty().isAlphanumeric(),
+        body('price').not().isEmpty().isNumeric(),
+        body('categoryId').not().isEmpty(),
+    ],
     handler: async (req: Request, res: Response) =>
         handleRequest({
             req,
             res,
             responseSuccessStatus: StatusCodes.CREATED,
-            messages: { uniqueConstraintFailed: 'Email must be unique.' },
-            execute: async () => createCategory(req.body as TCategoryData),
+            messages: { uniqueConstraintFailed: 'Name must be unique.' },
+            execute: async () =>
+                await createDish(req.body as Omit<TDishData, 'id'>),
         }),
 } as TRoute

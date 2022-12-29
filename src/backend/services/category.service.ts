@@ -1,7 +1,9 @@
 import { prisma } from '../database'
 import { v4 } from 'uuid'
 
-export const createCategory = async ({ name }: { name: string }) => {
+export type TCategoryData = { name: string }
+
+export const createCategory = async ({ name }: TCategoryData) => {
     return await prisma.category.create({
         data: {
             id: v4(),

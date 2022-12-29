@@ -32,6 +32,8 @@ export const checkPrismaError = (
         switch (code) {
             case 'P2002':
                 return getPrismaErrorResponse(messages?.uniqueConstraintFailed)
+            case 'P2003':
+                return getPrismaErrorResponse('Foreign key constraint failed')
         }
     }
 

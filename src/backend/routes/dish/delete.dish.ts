@@ -1,22 +1,21 @@
 import { Request, Response } from 'express'
-import { body } from 'express-validator'
 import { StatusCodes } from 'http-status-codes'
 
 import { TRoute } from '../types'
 import { handleRequest } from '../../utils/request.utils'
 import { authorize } from '../../utils/middleware.utils'
-import { createCategory, TCategoryData } from '../../services/category.service'
+import { param } from 'express-validator'
+import { deleteDish } from '../../services/dish.service'
 
 export default {
-    method: 'post',
-    path: '/api/category',
-    validators: [authorize, body('name').not().isEmpty().isAlphanumeric()],
+    method: 'delete',
+    path: '/api/dish/:id',
+    validators: [authorize, param('id').not().isEmpty()],
     handler: async (req: Request, res: Response) =>
         handleRequest({
             req,
             res,
             responseSuccessStatus: StatusCodes.CREATED,
-            messages: { uniqueConstraintFailed: 'Email must be unique.' },
-            execute: async () => createCategory(req.body as TCategoryData),
+            execute: async () => await deleteDish({ id: req.params.id }),
         }),
 } as TRoute
