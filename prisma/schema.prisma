@@ -10,9 +10,64 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+model Category {
+  id        String   @id
+  name      String   @unique
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  Dish      Dish[]
+}
+
+model Dish {
+  id          String      @id
+  name        String      @unique
+  description String?
+  price       Decimal
+  createdAt   DateTime    @default(now())
+  updatedAt   DateTime    @updatedAt
+  category    Category    @relation(fields: [categoryId], references: [id])
+  categoryId  String
+  OrderDish   OrderDish[]
+}
+
+model Order {
+  id          String      @id
+  tableNumber Int
+  totalPrice  Decimal     @default(0)
+  createdAt   DateTime    @default(now())
+  updatedAt   DateTime    @updatedAt
+  closedAt    DateTime?
+  OrderDish   OrderDish[]
+  Payment    Payment[]
+}
+
+model OrderDish {
+  id        String   @id
+  order     Order    @relation(fields: [orderId], references: [id])
+  orderId   String
+  dish      Dish     @relation(fields: [dishId], references: [id])
+  dishId    String
+  price     Decimal
+  count     Int      @default(1)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Payment {
+  id        String   @id
+  order     Order    @relation(fields: [orderId], references: [id])
+  orderId   String
+  method    String   @default("CASH")
+  amount    Decimal
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
 model User {
-    id    String  @id
-    email String  @unique
-    name  String?
-    password String
+  id        String   @id
+  email     String   @unique
+  name      String?
+  password  String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
