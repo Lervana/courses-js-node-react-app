@@ -61,7 +61,6 @@ const DISHES = [
         description: 'vegetable gyoza dumplings 2 pcs, roasted garlic, sesame',
         category: 'Soups',
     },
-
     {
         name: 'Vegan Miso Kimchi',
         price: 31,
@@ -121,6 +120,41 @@ const DISHES = [
         price: 18,
         description: 'boiled young soybeans',
         category: 'Salads',
+    },
+    {
+        name: 'Lunch 1',
+        price: 36,
+        description:
+            'Wakame seaweed, cucumber, sesame, carrot, and ginger sauce',
+        category: 'Rice',
+    },
+    {
+        name: 'Lunch 2',
+        price: 36,
+        description:
+            'Futomaki vege: philadelphia, avocado, lettuce, cucumber 6 pcs. Edamame salad. Nigiri avocado 2 pcs.',
+        category: 'Rice',
+    },
+    {
+        name: 'Lunch 3',
+        price: 35,
+        description:
+            'Futomaki raw salmon, philadelphia, avocado, lettuce, cucumber 6 pcs.California crab salad 6 pcs. Nigiri salmon 2 pcs.',
+        category: 'Rice',
+    },
+    {
+        name: 'Lunch 4',
+        price: 33,
+        description:
+            'Futomaki baked salmon, philadelphia, kanpyo, cucumber, lettuce 6 pcs. California shrimp in tempura, cucumber, oshinko, sesame, and mayonnaise 6 pcs.',
+        category: 'Rice',
+    },
+    {
+        name: 'Lunch 5',
+        price: 35,
+        description:
+            'Futomaki shrimp in tempura, oshinko, cucumber, mayonnaise, lettuce 6 pcs. Hosomaki cucumber, sesame 4 pcs. Hosomaki roasted salmon 4 pcs. Nigiri tamago 2 pcs. Nigiri salmon 2 pcs.',
+        category: 'Rice',
     },
 ]
 

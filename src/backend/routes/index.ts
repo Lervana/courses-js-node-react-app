@@ -15,6 +15,10 @@ import patchOrder from './order/patch.order'
 import getOrder from './order/get.order'
 import deleteOrder from './order/delete.order'
 import getOrders from './order/get.orders'
+import postPayment from './payment/post.payment'
+import getPayment from './payment/get.payment'
+import getCurrency from './payment/get.currency'
+import getOrdersByDate from './order/get.orders.byDate'
 
 const router = express.Router()
 
@@ -39,7 +43,11 @@ const apiRoutes = [
     patchOrder,
     getOrder,
     getOrders,
+    getOrdersByDate,
     deleteOrder,
+    postPayment,
+    getPayment,
+    getCurrency,
 ]
 
 apiRoutes.forEach((route) =>

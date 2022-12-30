@@ -2,18 +2,12 @@ import { prisma } from '../database'
 import { v4 } from 'uuid'
 import { StatusCodes } from 'http-status-codes'
 import { TCustomError } from '../utils/request.utils'
-import { Decimal } from '@prisma/client/runtime'
 
 export type TOrderData = {
     id: string
     tableNumber: number
     dishes: Record<string, number>
 }
-
-// Utils
-
-const getDishPrice = (count: number, price?: Decimal) =>
-    parseFloat(price?.toString() ?? '') * count
 
 const createOrderDish = async (
     orderId: string,
@@ -34,7 +28,7 @@ const createOrderDish = async (
                 price: dish?.price ?? 0,
             },
         }),
-        dishTotalPrice: getDishPrice(count, dish?.price),
+        dishTotalPrice: dish?.price ? dish?.price * count : 0,
     }
 }
 
@@ -184,13 +178,23 @@ export const getOrder = async ({ id }: { id: string }) =>
         },
     })
 
-export const getOrders = async () =>
-    await prisma.order.findMany({
-        include: {
-            OrderDish: true,
-            Payment: true,
-        },
-    })
+export const getOrders = async (condition?: { gte: Date; lte: Date }) =>
+    condition
+        ? await prisma.order.findMany({
+              include: {
+                  OrderDish: true,
+                  Payment: true,
+              },
+              where: {
+                  OR: [{ closedAt: condition }, { createdAt: condition }],
+              },
+          })
+        : await prisma.order.findMany({
+              include: {
+                  OrderDish: true,
+                  Payment: true,
+              },
+          })
 
 export const deleteOrder = async ({ id }: { id: string }) =>
     await prisma.$transaction([
